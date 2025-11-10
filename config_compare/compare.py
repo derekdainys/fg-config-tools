@@ -2,32 +2,45 @@ from jsondiff import diff
 import re
 import yaml
 
-def change_indent(config, indent):
+def change_indent(config, indentation_size):
+    regex = re.compile("^(config |set |edit |delete |unset |end$|next$)(.*)")
+    indent = 0
     change_indent_config = ""
     for line in config.split("\n"):
-        indent_calc = int((len(line) - len(line.lstrip()) )/4)
-        
-        indentation = " " * indent * indent_calc
         line = line.lstrip()
 
-        change_indent_config += f"{indentation}{line}\n"
+        result = regex.match(line)
+
+        if result is not None:
+            action = result.group(1).strip()
+
+            if action == "next" or action =="end":
+                indent -= indentation_size
+
+            indentation = indent * " "
+
+            if action == "config" or action == "edit":
+                indent += indentation_size
+                
+            change_indent_config += f"{indentation}{line}\n"
 
     return change_indent_config
 
-def config_compare(running, candidate, config_type="file", indent=4):
+def config_compare(current, candidate, config_type="file", indent=4):
 
     if config_type == "file":
-        running_json = config_to_json(config=open(running, "r").read())
+        current_json = config_to_json(config=open(current, "r").read())
         candidate_json = config_to_json(config=open(candidate,"r").read())
     elif config_type == "text":
-        running_json = config_to_json(config=running)
+        current_json = config_to_json(config=current)
         candidate_json = config_to_json(config=candidate)
 
-    compare_json = json_compare(running=running_json, candidate=candidate_json)
-    clean_json = json_cleanup(json=compare_json, running=running_json)
+    compare_json = json_compare(current=current_json, candidate=candidate_json)
+    clean_json = json_cleanup(json=compare_json, current=current_json)
     diff = json_to_text(json=clean_json)
+    print(diff)
 
-    changed_indent = change_indent(config=diff, indent=indent)
+    changed_indent = change_indent(config=diff, indentation_size=indent)
     return changed_indent
     
 def config_to_json(config):
@@ -91,7 +104,7 @@ def dictionary_search(dictionary, find_key):
                 return result
             
 
-def json_cleanup(json, running):
+def json_cleanup(json, current):
     split_json = json.split("\n")
     json_config = ""
     for line in split_json:
@@ -113,7 +126,7 @@ def json_cleanup(json, running):
             json_config += f"{indentation}{line}\n"
         elif "- config" in line:
             line = line.replace("- config", "config")
-            remove_config_lines = remove_config_block(dictionary_search(running, line), indentation_size=indent_check)
+            remove_config_lines = remove_config_block(dictionary_search(current, line), indentation_size=indent_check)
             json_config += f"{indentation}{line}\n"
             for remove_config_line in remove_config_lines:
                 json_config += remove_config_line
@@ -122,8 +135,8 @@ def json_cleanup(json, running):
         
     return json_config
 
-def json_compare(running, candidate):
-    result = diff(running, candidate, syntax="explicit")
+def json_compare(current, candidate):
+    result = diff(current, candidate, syntax="explicit")
     return yaml.dump(result)
 
 def json_to_text(json):

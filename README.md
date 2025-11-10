@@ -4,8 +4,8 @@ A lot of traditional tools lack the ability to manage fortinet configurations ef
 
 They either provide a way to add elements or to remove them from the configuration.
 
-This is a tool that can take two configurations(running and candidate) and show the exact path needed
-to go from the running configuration to candidate configuration. Including removing unnecessary elements.
+This is a tool that can take two configurations(current and candidate) and show the exact path needed
+to go from the current configuration to candidate configuration. Including removing unnecessary elements.
 
 It only provides the path needed to make the change on the device. It does not push configurations to devices
 this would need to be handled by some other library or tool.
@@ -16,7 +16,7 @@ You may find some  example configurations are provided in the ```configs``` fold
 
 The focus will be on the BGP part of the configuration.
 
-The running configuration that may be found in ```configs/running.conf```
+The current configuration that may be found in ```configs/current.conf```
 ```
 config router bgp
     set as 65000
@@ -51,7 +51,7 @@ Some elements need to be updated, some removed, and some added.
 
 Suppose you have a simple example like the one found in ```example_1.py```
 ```python
-print(config_compare(running="configs/running.conf", candidate="configs/candidate.conf"))
+config_compare(current="configs/current.conf", candidate="configs/candidate.conf")
 ```
 It would produde an output as such
 ```
@@ -73,7 +73,7 @@ config router bgp
 end
 ```
 
-Which when applied to the running configuration will turn it into the candidate configuration.
+Which when applied to the current configuration will turn it into the candidate configuration.
 
 For additional examples please view ```example_arg.py``` on how you might use arguments to pass in files, as well as generate
 a revert configuration.
@@ -90,7 +90,7 @@ to devices as there would be no need to provide actual spacing.
 This can be adjusted as such:
 
 ```python
-config_compare(running="configs/running.conf", candidate="configs/candidate.conf", indent=0)
+config_compare(current="configs/current.conf", candidate="configs/candidate.conf", indent=0)
 ```
 
 This may be useful when pushing configurations to devices, but not actually looking at differences.
