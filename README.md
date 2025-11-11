@@ -93,6 +93,3 @@ This can be adjusted as such:
 config_compare(current="configs/current.conf", candidate="configs/candidate.conf", indent=0)
 ```
 
-This may be useful when pushing configurations to devices, but not actually looking at differences.
-
-
