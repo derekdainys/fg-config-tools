@@ -1,4 +1,4 @@
-fg-delta-diff
+fg-config-delta
 ===
 A lot of traditional tools lack the ability to manage fortinet configurations effectively.
 

@@ -1,5 +1,5 @@
 import argparse
-from config_compare.deltadiff import config_compare
+from config_compare.config_delta import config_compare
 
 def main():
     parser = argparse.ArgumentParser(description="A program that will show a diff between two fortinet configurations")
