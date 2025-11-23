@@ -1,5 +1,7 @@
-fg-config-delta
-===
+# fg-config-tools
+
+## Config Compare
+
 A lot of traditional tools lack the ability to manage fortinet configurations effectively.
 
 They either provide a way to add elements or to remove them from the configuration.
@@ -10,8 +12,7 @@ to go from the current configuration to candidate configuration. Including remov
 It only provides the path needed to make the change on the device. It does not push configurations to devices
 this would need to be handled by some other library or tool.
 
-Examples
----
+### Examples
 You may find some  example configurations are provided in the ```configs``` folder.
 
 The focus will be on the BGP part of the configuration.
@@ -78,8 +79,7 @@ Which when applied to the current configuration will turn it into the candidate 
 For additional examples please view ```example_arg.py``` on how you might use arguments to pass in files, as well as generate
 a revert configuration.
 
-Features
----
+### Features
 Config Compare function has an option to change indentation if a different spacing is required.
 
 Default is always set to **indent=4** which should match the fortinet output.

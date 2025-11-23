@@ -1,0 +1,18 @@
+[project]
+name = "fgconfigtools"
+version = "1.0.0"
+authors = [
+    { name = "Derek Dainys"}
+]
+dependencies = [
+    "jsondiff"
+]
+classifiers = [
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13"
+]
+readme = "README.md"
+
+[project.urls]
+Repository = "https://github.com/derekdainys/fgconfigtools"
