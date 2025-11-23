@@ -8,11 +8,11 @@ dependencies = [
     "jsondiff"
 ]
 classifiers = [
-        "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13"
 ]
 readme = "README.md"
+license = "MIT"
 
 [project.urls]
-Repository = "https://github.com/derekdainys/fgconfigtools"
+Repository = "https://github.com/derekdainys/fg-config-tools"
