@@ -1,5 +1,11 @@
 # fg-config-tools
 
+## Installation
+
+```
+pip install fgconfigtools
+```
+
 ## Config Compare
 
 A lot of traditional tools lack the ability to manage fortinet configurations effectively.
