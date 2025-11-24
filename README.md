@@ -15,7 +15,7 @@ They either provide a way to add elements or to remove them from the configurati
 This is a tool that can take two configurations(current and candidate) and show the exact path needed
 to go from the current configuration to candidate configuration. Including removing unnecessary elements.
 
-It only provides the path needed to make the change on the device. It does not push configurations to devices
+It only provides the path needed to make the change on the device. It does not push configurations to devices,
 this would need to be handled by some other library or tool.
 
 ### Examples
@@ -56,7 +56,7 @@ end
 ```
 Some elements need to be updated, some removed, and some added.
 
-Suppose you have a simple example like the one found in ```example_1.py```
+Suppose you have a simple example like the one found in ```examples/basic.py```
 ```python
 config_compare(current="configs/current.conf", candidate="configs/candidate.conf")
 ```
@@ -82,7 +82,7 @@ end
 
 Which when applied to the current configuration will turn it into the candidate configuration.
 
-For additional examples please view ```example_arg.py``` on how you might use arguments to pass in files, as well as generate
+For additional examples please view ```examples/arg.py``` on how you might use arguments to pass in files, as well as generate
 a revert configuration.
 
 ### Features
